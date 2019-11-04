@@ -1,13 +1,217 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #f3f5f5;
+  color: #2e3333;
+}
+
+/* HEADER */
+.Header {
+  background: #fff;
+}
+
+.TopBar {
+  height: 60px;
+  border-bottom: 1px solid #e9ebeb;
+}
+
+.RestaurantInfos--center,
+.TopBar--center {
+  margin: 0 auto;
+  width: 96vw;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: row;
+}
+
+.TopBar--center {
+  height: 100%;
+  align-items: center;
+}
+
+.Logo {
+  height: 70%;
+}
+
+.RestaurantInfos--center {
+  padding: 30px 0;
+  align-items: flex-start;
+}
+
+.RestaurantInfos--texts {
+  flex: 1 1;
+  margin-right: 30px;
+}
+
+.RestaurantInfos--texts h1 {
+  font-size: 2rem;
+  margin-top: 0.6rem;
+  margin-bottom: 2rem;
+}
+
+.RestaurantInfos--texts p {
+  color: #868a8a;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.RestaurantInfos--cover {
+  width: 350px;
+  border-radius: 5px;
+  overflow: hidden;
+  background: #f3f5f5;
+}
+
+/* CONTENT */
+.Content--center {
+  margin: 0 auto;
+  width: 96vw;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+/* MENU */
+.Menu {
+  flex: 1 1;
+  margin-right: 30px;
+  margin-bottom: -25px;
+}
+
+.MenuItems--items {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+
+.MenuItem {
+  width: 50%;
+  min-width: 300px;
+  padding: 0 10px 25px;
+}
+
+.MenuItem--card {
+  border-radius: 5px;
+  height: 160px;
+  background: #fff;
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  cursor: pointer;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+.MenuItem--texts {
+  flex: 1 1;
+  margin-right: 15px;
+}
+
+.MenuItem--texts h3 {
+  font-weight: 400;
+  margin: 0 0 0.5rem;
+}
+
+.MenuItem--texts p {
+  font-size: 0.9rem;
+  color: #808484;
+  line-height: 1.3rem;
+  height: 2.6rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 0 1rem;
+}
+
+.MenuItem--infos {
+  display: flex;
+  align-items: center;
+}
+
+.MenuItem--price {
+  color: #808484;
+  font-size: 1.1rem;
+}
+
+.MenuItem--popular {
+  color: #ff8000;
+  font-size: 0.8rem;
+  margin-left: 1rem;
+  font-weight: 800;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.MenuItem--picture {
+  height: 130px;
+  width: 130px;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+
+.MenuItem--picture img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* CART */
+.Cart {
+  width: 350px;
+  position: sticky;
+  top: 0;
+}
+
+.Cart--card {
+  box-shadow: 0 22px 24px 0 rgba(46, 51, 51, 0.07);
+  background: #fff;
+  border-radius: 4px;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 30px 0;
+}
+
+.Cart--disabled {
+  display: block;
+  margin: 10px;
+  border-radius: 5px;
+  padding: 1rem;
+  border: none;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: not-allowed;
+  background: #bac3c3;
+  color: #8b9a9b;
+}
+
+.Cart--validate {
+  display: block;
+  margin: 10px;
+  border-radius: 5px;
+  padding: 1rem;
+  background: #00cdbd;
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.Cart--empty {
+  color: #868a8a;
+  text-align: center;
+  padding: 3rem 0;
 }
