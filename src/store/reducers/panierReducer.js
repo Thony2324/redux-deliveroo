@@ -1,4 +1,4 @@
-import { ADD_TO_CART, INCREMENT_QUANTITY, DECREMENT_QUANTITY } from "../../actions";
+import { ADD_TO_CART, INCREMENT_QUANTITY, DECREMENT_QUANTITY, SHIPPING_COST } from "../../constants";
 
 const initialState = {
   cart: [],
@@ -9,7 +9,6 @@ const initialState = {
 let tab_cart = [];
 let sub_total = 0;
 let final_total = 0;
-const shipping_cost = 2.5;
 
 export const panierReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -30,7 +29,7 @@ export const panierReducer = (state = initialState, action) => {
       }
       // Calcul total
       sub_total = sub_total + parseFloat(action.payload.price);
-      final_total = sub_total + shipping_cost;
+      final_total = sub_total + SHIPPING_COST;
       return {
         ...state,
         cart: tab_cart,
@@ -42,7 +41,7 @@ export const panierReducer = (state = initialState, action) => {
       tab_cart[itemIndex2].quantity++;
 
       sub_total = sub_total + parseFloat(tab_cart[itemIndex2].price);
-      final_total = sub_total + shipping_cost;
+      final_total = sub_total + SHIPPING_COST;
 
       return {
         ...state,
@@ -55,7 +54,7 @@ export const panierReducer = (state = initialState, action) => {
       tab_cart[itemIndex3].quantity--;
 
       sub_total = sub_total - parseFloat(tab_cart[itemIndex3].price);
-      final_total = sub_total + shipping_cost;
+      final_total = sub_total + SHIPPING_COST;
 
       // Check if quantity = 0, and remove item from cart
       if (tab_cart[itemIndex3].quantity === 0) {

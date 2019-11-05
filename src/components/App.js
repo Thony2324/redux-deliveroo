@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchApiDeliveroo, addToCart, incrementQuantity, decrementQuantity } from "../actions";
-
-const shipping_cost = 2.5;
+import { formatPrice } from "../utils";
+import { SHIPPING_COST } from "../constants";
+import Loader from "./Loader";
 
 const mapStateToProps = state => {
   return {
@@ -36,24 +37,7 @@ class App extends React.Component {
   render() {
     // IF DATA NULL OR LOADING
     if (this.props.deliveroo.data === null || this.props.deliveroo.isLoading) {
-      return (
-        <div className="loader">
-          <div className="sk-fading-circle">
-            <div className="sk-circle1 sk-circle"></div>
-            <div className="sk-circle2 sk-circle"></div>
-            <div className="sk-circle3 sk-circle"></div>
-            <div className="sk-circle4 sk-circle"></div>
-            <div className="sk-circle5 sk-circle"></div>
-            <div className="sk-circle6 sk-circle"></div>
-            <div className="sk-circle7 sk-circle"></div>
-            <div className="sk-circle8 sk-circle"></div>
-            <div className="sk-circle9 sk-circle"></div>
-            <div className="sk-circle10 sk-circle"></div>
-            <div className="sk-circle11 sk-circle"></div>
-            <div className="sk-circle12 sk-circle"></div>
-          </div>
-        </div>
-      );
+      return <Loader />;
     }
     // ELSE RENDER THE APP
     return (
@@ -106,11 +90,7 @@ class App extends React.Component {
                                   <h3>{item.title}</h3>
                                   {item.description ? <p>{item.description}</p> : ""}
                                   <div className="MenuItem--infos">
-                                    <span className="MenuItem--price">
-                                      {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
-                                        item.price
-                                      )}
-                                    </span>
+                                    <span className="MenuItem--price">{formatPrice(item.price)}</span>
                                     {item.popular ? (
                                       <span className="MenuItem--popular">
                                         <svg
@@ -205,11 +185,7 @@ class App extends React.Component {
                                 </span>
                               </div>
                               <span className="Cart--item-name">{item.title}</span>
-                              <span className="Cart--amount">
-                                {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
-                                  item.price
-                                )}
-                              </span>
+                              <span className="Cart--amount">{formatPrice(item.price)}</span>
                             </div>
                           );
                         })}
@@ -217,28 +193,16 @@ class App extends React.Component {
                       <div className="Cart--results">
                         <div className="Cart--result-line">
                           <span className="Cart--result-name">Sous-total</span>
-                          <span className="Cart--amount">
-                            {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
-                              this.props.panier.subTotal
-                            )}
-                          </span>
+                          <span className="Cart--amount">{formatPrice(this.props.panier.subTotal)}</span>
                         </div>
                         <div className="Cart--result-line">
                           <span className="Cart--result-name">Frais de livraison</span>
-                          <span>
-                            {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
-                              shipping_cost
-                            )}
-                          </span>
+                          <span>{formatPrice(SHIPPING_COST)}</span>
                         </div>
                       </div>
                       <div className="Cart--total">
                         <span className="Cart--result-name">Total</span>
-                        <span className="Cart--amount">
-                          {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
-                            this.props.panier.total
-                          )}
-                        </span>
+                        <span className="Cart--amount">{formatPrice(this.props.panier.total)}</span>
                       </div>
                     </div>
                   </React.Fragment>

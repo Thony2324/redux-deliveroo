@@ -1,4 +1,4 @@
-import { SET_DELIVEROO_REQUEST, SET_DELIVEROO_SUCCESS, SET_DELIVEROO_ERROR } from "../../actions";
+import { SET_DELIVEROO_REQUEST, SET_DELIVEROO_SUCCESS, SET_DELIVEROO_ERROR } from "../../constants";
 
 const initialState = {
   isLoading: null,
