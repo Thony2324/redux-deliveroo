@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchApiDeliveroo } from "../actions";
+import { fetchApiDeliveroo, addToCart } from "../actions";
+
+const shipping_cost = 2.5;
 
 const mapStateToProps = state => {
   return {
@@ -10,7 +12,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getDeliveroo: () => fetchApiDeliveroo(dispatch) // renvoie une fonction
+    getDeliveroo: () => fetchApiDeliveroo(dispatch), // renvoie une fonction
+    handleAddToCart: item => addToCart(item, dispatch)
   };
 };
 
@@ -83,13 +86,17 @@ class App extends React.Component {
                       <div className="MenuItems--items">
                         {this.props.deliveroo.data.menu[categ].map(item => {
                           return (
-                            <div key={item.id} className="MenuItem">
+                            <div key={item.id} className="MenuItem" onClick={() => this.props.handleAddToCart(item)}>
                               <div className="MenuItem--card">
                                 <div className="MenuItem--texts">
                                   <h3>{item.title}</h3>
                                   {item.description ? <p>{item.description}</p> : ""}
                                   <div className="MenuItem--infos">
-                                    <span className="MenuItem--price">{item.price} €</span>
+                                    <span className="MenuItem--price">
+                                      {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
+                                        item.price
+                                      )}
+                                    </span>
                                     {item.popular ? (
                                       <span className="MenuItem--popular">
                                         <svg
@@ -126,8 +133,102 @@ class App extends React.Component {
             </div>
             <div className="Cart">
               <div className="Cart--card">
-                <button className="xCart--validate Cart--disabled">Valider mon panier</button>
-                <div className="Cart--empty">Votre panier est vide</div>
+                {this.props.deliveroo.cart.length === 0 ? (
+                  <React.Fragment>
+                    <button className="Cart--validate Cart--disabled">Valider mon panier</button>
+                    <div className="Cart--empty">Votre panier est vide</div>
+                  </React.Fragment>
+                ) : (
+                  <React.Fragment>
+                    <button className="Cart--validate">Valider mon panier</button>
+                    <div>
+                      <div className="Cart--items">
+                        {this.props.deliveroo.cart.map(item => {
+                          return (
+                            <div key={item.id} className="Cart--line">
+                              <div className="Cart--counter">
+                                <span>
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="feather feather-plus-circle"
+                                    style={{
+                                      width: "20px",
+                                      height: "20px",
+                                      cursor: "pointer",
+                                      color: "rgb(0, 206, 189)"
+                                    }}>
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                                  </svg>
+                                </span>
+                                <span>1</span>
+                                <span>
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="feather feather-plus-circle"
+                                    style={{
+                                      width: "20px",
+                                      height: "20px",
+                                      cursor: "pointer",
+                                      color: "rgb(0, 206, 189)"
+                                    }}>
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                                  </svg>
+                                </span>
+                              </div>
+                              <span className="Cart--item-name">{item.title}</span>
+                              <span className="Cart--amount">
+                                {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
+                                  item.price
+                                )}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <div className="Cart--results">
+                        <div className="Cart--result-line">
+                          <span className="Cart--result-name">Sous-total</span>
+                          <span className="Cart--amount">
+                            {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
+                              this.props.deliveroo.subTotal
+                            )}
+                          </span>
+                        </div>
+                        <div className="Cart--result-line">
+                          <span className="Cart--result-name">Frais de livraison</span>
+                          <span>
+                            {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
+                              shipping_cost
+                            )}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="Cart--total">
+                        <span className="Cart--result-name">Total</span>
+                        <span className="Cart--amount">
+                          {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
+                            this.props.deliveroo.total
+                          )}
+                        </span>
+                      </div>
+                    </div>
+                  </React.Fragment>
+                )}
               </div>
             </div>
           </div>

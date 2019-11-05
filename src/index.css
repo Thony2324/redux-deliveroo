@@ -276,6 +276,10 @@ body {
   transition-duration: 0.3s;
 }
 
+.MenuItem--card:hover {
+  box-shadow: 0 22px 24px 0 rgba(46, 51, 51, 0.07);
+}
+
 .MenuItem--texts {
   flex: 1 1;
   margin-right: 15px;
@@ -348,19 +352,6 @@ body {
   margin: 30px 0;
 }
 
-.Cart--disabled {
-  display: block;
-  margin: 10px;
-  border-radius: 5px;
-  padding: 1rem;
-  border: none;
-  font-weight: 700;
-  font-size: 1rem;
-  cursor: not-allowed;
-  background: #bac3c3;
-  color: #8b9a9b;
-}
-
 .Cart--validate {
   display: block;
   margin: 10px;
@@ -373,8 +364,77 @@ body {
   font-size: 1rem;
 }
 
+.Cart--disabled {
+  background: #bac3c3;
+  color: #8b9a9b;
+}
+
 .Cart--empty {
   color: #868a8a;
   text-align: center;
   padding: 3rem 0;
+}
+
+.Cart--items {
+  border-bottom: 1px solid #d1d7d7;
+  margin: 0 10px;
+  max-height: calc(100vh - 300px);
+  overflow: auto;
+}
+
+.Cart--line {
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem 0;
+}
+
+.Cart--counter {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  color: #808484;
+}
+
+.Cart--counter span {
+  min-width: 1rem;
+  text-align: center;
+}
+
+.Cart--item-name {
+  flex: 1 1;
+}
+
+.Cart--amount {
+  width: 85px;
+  text-align: right;
+}
+
+.Cart--results {
+  margin: 0 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #d1d7d7;
+}
+
+.Cart--result-line {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.Cart--result-name {
+  flex: 1 1;
+}
+
+.Cart--amount {
+  width: 85px;
+  text-align: right;
+}
+
+.Cart--total {
+  display: flex;
+  align-items: flex-start;
+  padding: 1.3rem 0;
+  margin: 0 10px;
+  font-weight: 600;
+  font-size: 1.2rem;
 }

@@ -1,6 +1,7 @@
 export const SET_DELIVEROO_REQUEST = "SET_DELIVEROO_REQUEST";
 export const SET_DELIVEROO_SUCCESS = "SET_DELIVEROO_SUCCESS";
 export const SET_DELIVEROO_ERROR = "SET_DELIVEROO_ERROR";
+export const ADD_TO_CART = "ADD_TO_CART";
 
 export const fetchApiDeliveroo = async dispatch => {
   dispatch({ type: SET_DELIVEROO_REQUEST });
@@ -16,4 +17,8 @@ export const fetchApiDeliveroo = async dispatch => {
     .catch(error => {
       dispatch({ type: SET_DELIVEROO_ERROR, payload: error });
     });
+};
+
+export const addToCart = (item, dispatch) => {
+  dispatch({ type: ADD_TO_CART, payload: item });
 };
