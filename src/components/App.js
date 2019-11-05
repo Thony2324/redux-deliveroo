@@ -6,7 +6,8 @@ const shipping_cost = 2.5;
 
 const mapStateToProps = state => {
   return {
-    deliveroo: state.deliveroo
+    deliveroo: state.deliveroo,
+    panier: state.panier
   };
 };
 
@@ -16,14 +17,13 @@ const mapDispatchToProps = dispatch => {
     handleAddToCart: item => addToCart(item, dispatch),
     handleIncrementQuantity: item => incrementQuantity(item, dispatch),
     handleDecrementQuantity: item => decrementQuantity(item, dispatch)
-    //handleRemoveFromCart: item => removeFromCart(item, dispatch)
   };
 };
 
 class App extends React.Component {
   found_item_in_cart = itemId => {
-    for (var i = 0; i < this.props.deliveroo.cart.length; i++) {
-      if (this.props.deliveroo.cart[i].id === itemId) {
+    for (var i = 0; i < this.props.panier.cart.length; i++) {
+      if (this.props.panier.cart[i].id === itemId) {
         return true;
       }
     }
@@ -97,19 +97,7 @@ class App extends React.Component {
                       <div className="MenuItems--items">
                         {this.props.deliveroo.data.menu[categ].map(item => {
                           return (
-                            <div
-                              key={item.id}
-                              className="MenuItem"
-                              onClick={() => {
-                                // if item not included in cart, i add the item, else remove
-                                //if (!this.found_item_in_cart(item.id)) {
-                                this.props.handleAddToCart(item);
-                                //}
-                                // else {
-                                //   //this.props.handleRemoveFromCart(item);
-                                //   console.log("TODO : remove item from cart...");
-                                // }
-                              }}>
+                            <div key={item.id} className="MenuItem" onClick={() => this.props.handleAddToCart(item)}>
                               <div
                                 className={
                                   "MenuItem--card " + (this.found_item_in_cart(item.id) ? "selectedItem" : "")
@@ -159,7 +147,7 @@ class App extends React.Component {
             </div>
             <div className="Cart">
               <div className="Cart--card">
-                {this.props.deliveroo.cart.length === 0 ? (
+                {this.props.panier.cart.length === 0 ? (
                   <React.Fragment>
                     <button className="Cart--validate Cart--disabled">Valider mon panier</button>
                     <div className="Cart--empty">Votre panier est vide</div>
@@ -169,7 +157,7 @@ class App extends React.Component {
                     <button className="Cart--validate">Valider mon panier</button>
                     <div>
                       <div className="Cart--items">
-                        {this.props.deliveroo.cart.map(item => {
+                        {this.props.panier.cart.map(item => {
                           return (
                             <div key={item.id} className="Cart--line">
                               <div className="Cart--counter">
@@ -231,7 +219,7 @@ class App extends React.Component {
                           <span className="Cart--result-name">Sous-total</span>
                           <span className="Cart--amount">
                             {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
-                              this.props.deliveroo.subTotal
+                              this.props.panier.subTotal
                             )}
                           </span>
                         </div>
@@ -248,7 +236,7 @@ class App extends React.Component {
                         <span className="Cart--result-name">Total</span>
                         <span className="Cart--amount">
                           {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
-                            this.props.deliveroo.total
+                            this.props.panier.total
                           )}
                         </span>
                       </div>

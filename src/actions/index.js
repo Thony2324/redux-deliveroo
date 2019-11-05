@@ -4,7 +4,6 @@ export const SET_DELIVEROO_ERROR = "SET_DELIVEROO_ERROR";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const INCREMENT_QUANTITY = "INCREMENT_QUANTITY";
 export const DECREMENT_QUANTITY = "DECREMENT_QUANTITY";
-//export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 
 export const fetchApiDeliveroo = async dispatch => {
   dispatch({ type: SET_DELIVEROO_REQUEST });
@@ -33,7 +32,3 @@ export const incrementQuantity = (item, dispatch) => {
 export const decrementQuantity = (item, dispatch) => {
   dispatch({ type: DECREMENT_QUANTITY, payload: item });
 };
-
-// export const removeFromCart = (item, dispatch) => {
-//   dispatch({ type: REMOVE_FROM_CART, payload: item });
-// };
