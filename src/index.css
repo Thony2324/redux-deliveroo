@@ -263,6 +263,10 @@ body {
   padding: 0 10px 25px;
 }
 
+.selectedItem {
+  border: 2px solid #02cdbd;
+}
+
 .MenuItem--card {
   border-radius: 5px;
   height: 160px;
@@ -362,11 +366,14 @@ body {
   border: none;
   font-weight: 700;
   font-size: 1rem;
+  cursor: pointer;
+  outline: none;
 }
 
 .Cart--disabled {
   background: #bac3c3;
   color: #8b9a9b;
+  cursor: not-allowed;
 }
 
 .Cart--empty {

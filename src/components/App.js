@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchApiDeliveroo, addToCart } from "../actions";
+//import { fetchApiDeliveroo, addToCart, removeFromCart } from "../actions";
 
 const shipping_cost = 2.5;
 
@@ -14,10 +15,19 @@ const mapDispatchToProps = dispatch => {
   return {
     getDeliveroo: () => fetchApiDeliveroo(dispatch), // renvoie une fonction
     handleAddToCart: item => addToCart(item, dispatch)
+    //handleRemoveFromCart: item => removeFromCart(item, dispatch)
   };
 };
 
 class App extends React.Component {
+  found_item_in_cart = itemId => {
+    for (var i = 0; i < this.props.deliveroo.cart.length; i++) {
+      if (this.props.deliveroo.cart[i].id === itemId) {
+        return true;
+      }
+    }
+  };
+
   componentDidMount() {
     this.props.getDeliveroo();
   }
@@ -86,8 +96,23 @@ class App extends React.Component {
                       <div className="MenuItems--items">
                         {this.props.deliveroo.data.menu[categ].map(item => {
                           return (
-                            <div key={item.id} className="MenuItem" onClick={() => this.props.handleAddToCart(item)}>
-                              <div className="MenuItem--card">
+                            <div
+                              key={item.id}
+                              className="MenuItem"
+                              onClick={() => {
+                                // if item not included in cart, i add the item, else remove
+                                //if (!this.found_item_in_cart(item.id)) {
+                                this.props.handleAddToCart(item);
+                                //}
+                                // else {
+                                //   //this.props.handleRemoveFromCart(item);
+                                //   console.log("TODO : remove item from cart...");
+                                // }
+                              }}>
+                              <div
+                                className={
+                                  "MenuItem--card " + (this.found_item_in_cart(item.id) ? "selectedItem" : "")
+                                }>
                                 <div className="MenuItem--texts">
                                   <h3>{item.title}</h3>
                                   {item.description ? <p>{item.description}</p> : ""}
@@ -167,7 +192,7 @@ class App extends React.Component {
                                     <line x1="8" y1="12" x2="16" y2="12"></line>
                                   </svg>
                                 </span>
-                                <span>1</span>
+                                <span>{item.quantity}</span>
                                 <span>
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
