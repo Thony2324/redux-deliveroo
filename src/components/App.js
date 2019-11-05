@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchApiDeliveroo, addToCart } from "../actions";
-//import { fetchApiDeliveroo, addToCart, removeFromCart } from "../actions";
+import { fetchApiDeliveroo, addToCart, incrementQuantity, decrementQuantity } from "../actions";
 
 const shipping_cost = 2.5;
 
@@ -14,7 +13,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getDeliveroo: () => fetchApiDeliveroo(dispatch), // renvoie une fonction
-    handleAddToCart: item => addToCart(item, dispatch)
+    handleAddToCart: item => addToCart(item, dispatch),
+    handleIncrementQuantity: item => incrementQuantity(item, dispatch),
+    handleDecrementQuantity: item => decrementQuantity(item, dispatch)
     //handleRemoveFromCart: item => removeFromCart(item, dispatch)
   };
 };
@@ -172,7 +173,7 @@ class App extends React.Component {
                           return (
                             <div key={item.id} className="Cart--line">
                               <div className="Cart--counter">
-                                <span>
+                                <span onClick={() => this.props.handleDecrementQuantity(item)}>
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 24 24"
@@ -193,7 +194,7 @@ class App extends React.Component {
                                   </svg>
                                 </span>
                                 <span>{item.quantity}</span>
-                                <span>
+                                <span onClick={() => this.props.handleIncrementQuantity(item)}>
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 24 24"

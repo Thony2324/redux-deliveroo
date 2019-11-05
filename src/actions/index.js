@@ -24,7 +24,14 @@ export const fetchApiDeliveroo = async dispatch => {
 
 export const addToCart = (item, dispatch) => {
   dispatch({ type: ADD_TO_CART, payload: item });
-  //dispatch({ type: INCREMENT_QUANTITY, payload: item.id });
+};
+
+export const incrementQuantity = (item, dispatch) => {
+  dispatch({ type: INCREMENT_QUANTITY, payload: item });
+};
+
+export const decrementQuantity = (item, dispatch) => {
+  dispatch({ type: DECREMENT_QUANTITY, payload: item });
 };
 
 // export const removeFromCart = (item, dispatch) => {

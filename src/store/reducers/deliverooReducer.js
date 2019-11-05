@@ -3,8 +3,8 @@ import {
   SET_DELIVEROO_SUCCESS,
   SET_DELIVEROO_ERROR,
   ADD_TO_CART,
-  INCREMENT_QUANTITY
-  //DECREMENT_QUANTITY
+  INCREMENT_QUANTITY,
+  DECREMENT_QUANTITY
   //REMOVE_FROM_CART
 } from "../../actions";
 
@@ -70,29 +70,37 @@ export const deliverooReducer = (state = initialState, action) => {
         total: final_total
       };
     case INCREMENT_QUANTITY:
-      // const objIndex = tab_cart.findIndex(item => item.id === action.payload);
-      // tab_cart[objIndex].quantity = tab_cart[objIndex].quantity++;
-      // tab_cart[objIndex].price = objIndex.quantity * objIndex.price;
+      const itemIndex2 = tab_cart.findIndex(item => item.id === action.payload.id);
+      tab_cart[itemIndex2].quantity++;
 
-      // sub_total = sub_total + parseFloat(tab_cart[objIndex].price);
-      // final_total = sub_total + shipping_cost;
+      sub_total = sub_total + parseFloat(tab_cart[itemIndex2].price);
+      final_total = sub_total + shipping_cost;
 
       return {
-        ...state
+        ...state,
+        cart: tab_cart,
+        subTotal: sub_total,
+        total: final_total
       };
-    // case REMOVE_FROM_CART:
-    //   // Filter tab cart with the item to remove
-    //   const filtered_tab = tab_cart.filter(item => item.id !== action.payload.id);
-    //   //filtered_tab.filter(item => item.id !== action.payload.id);
-    //   // Get price and add to prev
-    //   sub_total = sub_total - parseFloat(action.payload.price);
-    //   final_total = sub_total + shipping_cost;
-    //   return {
-    //     ...state,
-    //     cart: filtered_tab,
-    //     subTotal: sub_total,
-    //     total: final_total
-    //   };
+    case DECREMENT_QUANTITY:
+      const itemIndex3 = tab_cart.findIndex(item => item.id === action.payload.id);
+      tab_cart[itemIndex3].quantity--;
+
+      sub_total = sub_total - parseFloat(tab_cart[itemIndex3].price);
+      final_total = sub_total + shipping_cost;
+
+      // Check if quantity = 0, and remove item from cart
+      if (tab_cart[itemIndex3].quantity === 0) {
+        // remove item from cart
+        tab_cart = tab_cart.filter(item => item.id !== action.payload.id);
+      }
+
+      return {
+        ...state,
+        cart: tab_cart,
+        subTotal: sub_total,
+        total: final_total
+      };
     default:
       return state;
   }
