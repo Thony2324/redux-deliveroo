@@ -225,6 +225,22 @@ body {
   line-height: 1.5;
 }
 
+.reduc {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.reduc-svg {
+  margin-right: 10px;
+}
+
+.reduc-desc p {
+  line-height: 1;
+  font-size: 0.9rem;
+  margin: 5px 0;
+  color: #f07f05;
+}
+
 .RestaurantInfos--cover {
   width: 350px;
   border-radius: 5px;
@@ -267,6 +283,7 @@ body {
 }
 
 .MenuItem--card {
+  position: relative;
   border-radius: 5px;
   height: 160px;
   background: #fff;
@@ -277,6 +294,12 @@ body {
   cursor: pointer;
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
+}
+
+.ico-remove-item {
+  position: absolute;
+  top: -11px;
+  right: -11px;
 }
 
 .MenuItem--card:hover {
@@ -425,6 +448,10 @@ body {
   display: flex;
   align-items: center;
   padding: 0.5rem 0;
+}
+
+.reduc-line {
+  color: #f07f05;
 }
 
 .Cart--result-name {

@@ -34,6 +34,14 @@ const Cart = ({ panier, props }) => {
                   <span className="Cart--result-name">Sous-total</span>
                   <span className="Cart--amount">{formatPrice(panier.subTotal)}</span>
                 </div>
+                {panier.discount > 0 ? (
+                  <div className="Cart--result-line reduc-line">
+                    <span className="Cart--result-name">Réduction de 10%</span>
+                    <span className="Cart--amount">- {formatPrice(panier.discount)}</span>
+                  </div>
+                ) : (
+                  ""
+                )}
                 <div className="Cart--result-line">
                   <span className="Cart--result-name">Frais de livraison</span>
                   <span>{formatPrice(SHIPPING_COST)}</span>

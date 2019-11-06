@@ -19,6 +19,35 @@ const Header = ({ resto_name, resto_description, resto_picture }) => {
           <div className="RestaurantInfos--texts">
             <h1>{resto_name}</h1>
             <p>{resto_description}</p>
+            <div className="reduc">
+              <span className="reduc-svg">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="feather feather-gift"
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    color: "#f07f05"
+                  }}>
+                  <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                  <rect x="2" y="7" width="20" height="5"></rect>
+                  <line x1="12" y1="22" x2="12" y2="7"></line>
+                  <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                  <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                </svg>
+              </span>
+              <div className="reduc-desc">
+                <p>- 10 % sur tout le menu pour toute commande de plus de 50,00 € (hors frais de livraison).</p>
+              </div>
+            </div>
           </div>
           <img className="RestaurantInfos--cover" src={resto_picture} alt="restaurant cover" />
         </div>
