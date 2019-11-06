@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { formatPrice } from "../../utils";
-import { SHIPPING_COST } from "../../constants";
+import { SHIPPING_COST, DISCOUNT } from "../../constants";
 import CartItem from "../CartItem";
 
 const Cart = ({ panier, props }) => {
@@ -36,7 +36,7 @@ const Cart = ({ panier, props }) => {
                 </div>
                 {panier.discount > 0 ? (
                   <div className="Cart--result-line reduc-line">
-                    <span className="Cart--result-name">Réduction de 10%</span>
+                    <span className="Cart--result-name">Réduction de {DISCOUNT * 100} %</span>
                     <span className="Cart--amount">- {formatPrice(panier.discount)}</span>
                   </div>
                 ) : (
