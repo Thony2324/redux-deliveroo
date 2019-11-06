@@ -1,4 +1,4 @@
-import { ADD_TO_CART, INCREMENT_QUANTITY, DECREMENT_QUANTITY, SHIPPING_COST } from "../../constants";
+import { ADD_TO_CART, INCREMENT_QUANTITY, DECREMENT_QUANTITY, SHIPPING_COST, DISCOUNT } from "../../constants";
 
 const initialState = {
   cart: [],
@@ -32,7 +32,7 @@ export const panierReducer = (state = initialState, action) => {
       // Calcul total
       sub_total = sub_total + parseFloat(action.payload.price);
       if (sub_total > 50) {
-        deliveroo_discount = sub_total * 0.1;
+        deliveroo_discount = sub_total * DISCOUNT;
       }
       final_total = sub_total - deliveroo_discount + SHIPPING_COST;
       return {
@@ -48,7 +48,7 @@ export const panierReducer = (state = initialState, action) => {
 
       sub_total = sub_total + parseFloat(tab_cart[itemIndex2].price);
       if (sub_total > 50) {
-        deliveroo_discount = sub_total * 0.1;
+        deliveroo_discount = sub_total * DISCOUNT;
       }
       final_total = sub_total - deliveroo_discount + SHIPPING_COST;
 
@@ -65,7 +65,7 @@ export const panierReducer = (state = initialState, action) => {
 
       sub_total = sub_total - parseFloat(tab_cart[itemIndex3].price);
       if (sub_total > 50) {
-        deliveroo_discount = sub_total * 0.1;
+        deliveroo_discount = sub_total * DISCOUNT;
       } else {
         deliveroo_discount = 0;
       }

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { DISCOUNT } from "../../constants";
 
 const Header = ({ resto_name, resto_description, resto_picture }) => {
   return (
@@ -45,7 +46,10 @@ const Header = ({ resto_name, resto_description, resto_picture }) => {
                 </svg>
               </span>
               <div className="reduc-desc">
-                <p>- 10 % sur tout le menu pour toute commande de plus de 50,00 € (hors frais de livraison).</p>
+                <p>
+                  - {DISCOUNT * 100} % sur tout le menu pour toute commande de plus de 50,00 € (hors frais de
+                  livraison).
+                </p>
               </div>
             </div>
           </div>
