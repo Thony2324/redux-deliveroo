@@ -13,7 +13,6 @@ export const fetchApiDeliveroo = async dispatch => {
   await fetch("https://deliveroo-api.now.sh/menu")
     .then(response => response.json())
     .then(data => {
-      // enlever le timeout car non nécessaire, sert uniquement à mieux voir le loader...
       setTimeout(() => {
         dispatch({ type: SET_DELIVEROO_SUCCESS, payload: data });
       }, 500);

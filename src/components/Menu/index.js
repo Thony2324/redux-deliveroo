@@ -1,0 +1,35 @@
+import React from "react";
+import MenuItem from "../MenuItem";
+
+const Menu = ({ menu, props }) => {
+  return (
+    <div className="Menu">
+      {Object.keys(menu).map(categ => {
+        if (menu[categ].length === 0) {
+          return null;
+        }
+        return (
+          <React.Fragment key={categ}>
+            <div className="MenuItems">
+              <h2>{categ}</h2>
+              <div className="MenuItems--items">
+                {menu[categ].map(item => {
+                  return (
+                    <MenuItem
+                      key={item.id}
+                      item={item}
+                      cart={props.panier.cart}
+                      onClickItem={() => props.handleAddToCart(item)}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          </React.Fragment>
+        );
+      })}
+    </div>
+  );
+};
+
+export default Menu;
