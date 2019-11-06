@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { formatPrice } from "../../utils";
 import { SHIPPING_COST } from "../../constants";
 import CartItem from "../CartItem";
@@ -48,6 +49,11 @@ const Cart = ({ panier, props }) => {
       </div>
     </div>
   );
+};
+
+Cart.propTypes = {
+  panier: PropTypes.object.isRequired,
+  props: PropTypes.object.isRequired
 };
 
 export default Cart;

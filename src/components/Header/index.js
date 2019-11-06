@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Header = ({ resto_name, resto_description, resto_picture }) => {
   return (
@@ -24,6 +25,12 @@ const Header = ({ resto_name, resto_description, resto_picture }) => {
       </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  resto_name: PropTypes.string.isRequired,
+  resto_description: PropTypes.string.isRequired,
+  resto_picture: PropTypes.string.isRequired
 };
 
 export default Header;

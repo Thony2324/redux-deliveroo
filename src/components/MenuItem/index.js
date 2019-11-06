@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { formatPrice } from "../../utils";
 
 const found_item_in_cart = (itemId, cart) => {
@@ -45,6 +46,12 @@ const MenuItem = ({ item, cart, onClickItem }) => {
       </div>
     </div>
   );
+};
+
+MenuItem.propTypes = {
+  item: PropTypes.object.isRequired,
+  cart: PropTypes.array.isRequired,
+  onClickItem: PropTypes.func.isRequired
 };
 
 export default MenuItem;

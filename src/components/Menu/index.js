@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import MenuItem from "../MenuItem";
 
 const Menu = ({ menu, props }) => {
@@ -30,6 +31,11 @@ const Menu = ({ menu, props }) => {
       })}
     </div>
   );
+};
+
+Menu.propTypes = {
+  menu: PropTypes.object.isRequired,
+  props: PropTypes.object.isRequired
 };
 
 export default Menu;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { formatPrice } from "../../utils";
 
 const CartItem = ({ item, onDecrement, onIncrement }) => {
@@ -52,6 +53,12 @@ const CartItem = ({ item, onDecrement, onIncrement }) => {
       <span className="Cart--amount">{formatPrice(item.price)}</span>
     </div>
   );
+};
+
+CartItem.propTypes = {
+  item: PropTypes.object.isRequired,
+  onDecrement: PropTypes.func.isRequired,
+  onIncrement: PropTypes.func.isRequired
 };
 
 export default CartItem;
