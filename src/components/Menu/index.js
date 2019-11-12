@@ -2,7 +2,7 @@ import React from "react";
 // import PropTypes from "prop-types";
 import MenuItem from "../MenuItem";
 
-const Menu = ({ menu, props }) => {
+const Menu = ({ menu, props, isEnterprise }) => {
   return (
     <div className="Menu">
       {Object.keys(menu).map(categ => {
@@ -19,7 +19,6 @@ const Menu = ({ menu, props }) => {
                     <MenuItem
                       key={item.id}
                       item={item}
-                      cart={props.panier.cart}
                       onClickItem={() => props.handleIncrementQuantity(item.id)}
                     />
                   );
