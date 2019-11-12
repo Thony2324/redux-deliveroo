@@ -2,7 +2,6 @@ import {
   SET_DELIVEROO_REQUEST,
   SET_DELIVEROO_SUCCESS,
   SET_DELIVEROO_ERROR,
-  ADD_TO_CART,
   INCREMENT_QUANTITY,
   DECREMENT_QUANTITY
 } from "../constants";
@@ -22,14 +21,10 @@ export const fetchApiDeliveroo = async dispatch => {
     });
 };
 
-export const addToCart = (item, dispatch) => {
-  dispatch({ type: ADD_TO_CART, payload: item });
+export const incrementQuantity = id => {
+  return { type: INCREMENT_QUANTITY, payload: id };
 };
 
-export const incrementQuantity = (item, dispatch) => {
-  dispatch({ type: INCREMENT_QUANTITY, payload: item });
-};
-
-export const decrementQuantity = (item, dispatch) => {
-  dispatch({ type: DECREMENT_QUANTITY, payload: item });
+export const decrementQuantity = id => {
+  return { type: DECREMENT_QUANTITY, payload: id };
 };

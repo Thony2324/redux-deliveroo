@@ -1,34 +1,44 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchApiDeliveroo, addToCart, incrementQuantity, decrementQuantity } from "../actions";
+import {
+  fetchApiDeliveroo,
+  incrementQuantity,
+  decrementQuantity
+} from "../actions";
 import Loader from "./Loader";
 import Header from "./Header";
 import Menu from "./Menu";
 import Cart from "./Cart";
+import {
+  computeCartTotal,
+  getCartDetails
+} from "../store/reducers/panierReducer";
 
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   return {
     deliveroo: state.deliveroo,
     panier: state.panier
   };
 };
 
-const mapDispatchToProps = dispatch => {
+export const mapDispatchToProps = dispatch => {
   return {
     getDeliveroo: () => fetchApiDeliveroo(dispatch), // renvoie une fonction
-    handleAddToCart: item => addToCart(item, dispatch),
-    handleIncrementQuantity: item => incrementQuantity(item, dispatch),
-    handleDecrementQuantity: item => decrementQuantity(item, dispatch)
+    handleIncrementQuantity: id => dispatch(incrementQuantity(id)),
+    handleDecrementQuantity: id => dispatch(decrementQuantity(id))
   };
 };
 
-class App extends React.Component {
+export class App extends React.Component {
   componentDidMount() {
     // Call API
     this.props.getDeliveroo();
   }
 
   render() {
+    const cartDetails = getCartDetails(this.props.panier, this.props.deliveroo);
+    const cartTotal = computeCartTotal(cartDetails);
+
     // IF DATA NULL OR LOADING
     if (this.props.deliveroo.data === null || this.props.deliveroo.isLoading) {
       return <Loader />;
@@ -38,11 +48,20 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <Header resto_name={name} resto_description={description} resto_picture={picture} />
+        <Header
+          resto_name={name}
+          resto_description={description}
+          resto_picture={picture}
+        />
         <div className="Content">
           <div className="Content--center">
             <Menu menu={this.props.deliveroo.data.menu} props={this.props} />
-            <Cart panier={this.props.panier} props={this.props} />
+            <Cart
+              panier={cartDetails}
+              cartTotal={cartTotal}
+              handleIncrementQuantity={this.props.handleIncrementQuantity}
+              handleDecrementQuantity={this.props.handleDecrementQuantity}
+            />
           </div>
         </div>
       </div>
@@ -50,7 +69,4 @@ class App extends React.Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

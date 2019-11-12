@@ -1,16 +1,23 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { formatPrice } from "../../utils";
 import { SHIPPING_COST, DISCOUNT } from "../../constants";
 import CartItem from "../CartItem";
 
-const Cart = ({ panier, props }) => {
+const Cart = ({
+  panier,
+  cartTotal,
+  handleDecrementQuantity,
+  handleIncrementQuantity
+}) => {
   return (
     <div className="Cart">
       <div className="Cart--card">
-        {panier.cart.length === 0 ? (
+        {panier.length === 0 ? (
           <React.Fragment>
-            <button className="Cart--validate Cart--disabled">Valider mon panier</button>
+            <button className="Cart--validate Cart--disabled">
+              Valider mon panier
+            </button>
             <div className="Cart--empty">Votre panier est vide</div>
           </React.Fragment>
         ) : (
@@ -18,13 +25,15 @@ const Cart = ({ panier, props }) => {
             <button className="Cart--validate">Valider mon panier</button>
             <div>
               <div className="Cart--items">
-                {panier.cart.map(item => {
+                {panier.map(item => {
                   return (
                     <CartItem
                       key={item.id}
-                      item={item}
-                      onDecrement={() => props.handleDecrementQuantity(item)}
-                      onIncrement={() => props.handleIncrementQuantity(item)}
+                      quantity={item.quantity}
+                      title={item.item.title}
+                      price={item.item.price}
+                      onDecrement={() => handleDecrementQuantity(item.id)}
+                      onIncrement={() => handleIncrementQuantity(item.id)}
                     />
                   );
                 })}
@@ -32,12 +41,18 @@ const Cart = ({ panier, props }) => {
               <div className="Cart--results">
                 <div className="Cart--result-line">
                   <span className="Cart--result-name">Sous-total</span>
-                  <span className="Cart--amount">{formatPrice(panier.subTotal)}</span>
+                  <span className="Cart--amount">
+                    {formatPrice(cartTotal.subTotal)}
+                  </span>
                 </div>
-                {panier.discount > 0 ? (
+                {cartTotal.discount > 0 ? (
                   <div className="Cart--result-line reduc-line">
-                    <span className="Cart--result-name">Réduction de {DISCOUNT * 100} %</span>
-                    <span className="Cart--amount">- {formatPrice(panier.discount)}</span>
+                    <span className="Cart--result-name">
+                      Réduction de {DISCOUNT * 100} %
+                    </span>
+                    <span className="Cart--amount">
+                      - {formatPrice(cartTotal.discount)}
+                    </span>
                   </div>
                 ) : (
                   ""
@@ -49,7 +64,9 @@ const Cart = ({ panier, props }) => {
               </div>
               <div className="Cart--total">
                 <span className="Cart--result-name">Total</span>
-                <span className="Cart--amount">{formatPrice(panier.total)}</span>
+                <span data-testid="cart-total" className="Cart--amount">
+                  {formatPrice(cartTotal.total)}
+                </span>
               </div>
             </div>
           </React.Fragment>
@@ -59,9 +76,9 @@ const Cart = ({ panier, props }) => {
   );
 };
 
-Cart.propTypes = {
-  panier: PropTypes.object.isRequired,
-  props: PropTypes.object.isRequired
-};
+// Cart.propTypes = {
+//   panier: PropTypes.object.isRequired,
+//   props: PropTypes.object.isRequired
+// };
 
 export default Cart;

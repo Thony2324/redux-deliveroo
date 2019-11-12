@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import MenuItem from "../MenuItem";
 
 const Menu = ({ menu, props }) => {
@@ -20,7 +20,7 @@ const Menu = ({ menu, props }) => {
                       key={item.id}
                       item={item}
                       cart={props.panier.cart}
-                      onClickItem={() => props.handleAddToCart(item)}
+                      onClickItem={() => props.handleIncrementQuantity(item.id)}
                     />
                   );
                 })}
@@ -33,9 +33,9 @@ const Menu = ({ menu, props }) => {
   );
 };
 
-Menu.propTypes = {
-  menu: PropTypes.object.isRequired,
-  props: PropTypes.object.isRequired
-};
+// Menu.propTypes = {
+//   menu: PropTypes.object.isRequired,
+//   props: PropTypes.object.isRequired
+// };
 
 export default Menu;

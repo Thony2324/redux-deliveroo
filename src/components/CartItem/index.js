@@ -1,8 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { formatPrice } from "../../utils";
 
-const CartItem = ({ item, onDecrement, onIncrement }) => {
+const CartItem = ({ quantity, title, price, onDecrement, onIncrement }) => {
   return (
     <div className="Cart--line">
       <div className="Cart--counter">
@@ -21,12 +21,13 @@ const CartItem = ({ item, onDecrement, onIncrement }) => {
               height: "20px",
               cursor: "pointer",
               color: "rgb(0, 206, 189)"
-            }}>
+            }}
+          >
             <circle cx="12" cy="12" r="10"></circle>
             <line x1="8" y1="12" x2="16" y2="12"></line>
           </svg>
         </span>
-        <span>{item.quantity}</span>
+        <span>{quantity}</span>
         <span onClick={onIncrement}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -42,23 +43,24 @@ const CartItem = ({ item, onDecrement, onIncrement }) => {
               height: "20px",
               cursor: "pointer",
               color: "rgb(0, 206, 189)"
-            }}>
+            }}
+          >
             <circle cx="12" cy="12" r="10"></circle>
             <line x1="12" y1="8" x2="12" y2="16"></line>
             <line x1="8" y1="12" x2="16" y2="12"></line>
           </svg>
         </span>
       </div>
-      <span className="Cart--item-name">{item.title}</span>
-      <span className="Cart--amount">{formatPrice(item.price)}</span>
+      <span className="Cart--item-name">{title}</span>
+      <span className="Cart--amount">{formatPrice(price)}</span>
     </div>
   );
 };
 
-CartItem.propTypes = {
-  item: PropTypes.object.isRequired,
-  onDecrement: PropTypes.func.isRequired,
-  onIncrement: PropTypes.func.isRequired
-};
+// CartItem.propTypes = {
+//   item: PropTypes.object.isRequired,
+//   onDecrement: PropTypes.func.isRequired,
+//   onIncrement: PropTypes.func.isRequired
+// };
 
 export default CartItem;
